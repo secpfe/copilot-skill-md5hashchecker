@@ -20,5 +20,5 @@ def get_md5_hash(md5hash):
         return jsonify({"error": "Hash not found or error in source API"}), 404
 
 if __name__ == '__main__':
-    port = int(os.getenv('PORT', 5000))
+    port = int(os.getenv('PORT', 8000))
     app.run(host='0.0.0.0', port=port)
