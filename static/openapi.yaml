@@ -35,14 +35,19 @@ paths:
                             type: string
                       found:
                         type: boolean
+                        description: Tells whether the hash value was found in the database or not
                       hash:
                         type: string
+                        description: The original MD5 hash
                       hexpass:
                         type: string
+                        description: The hex value of the corresponding clear-text
                       hits:
                         type: integer
+                        description: How many requests for this MD5 hash were made
                       pass:
                         type: string
+                        description: The clear-text value for the provided MD5 hash
                       sysmsg:
                         type: array
                         items:
