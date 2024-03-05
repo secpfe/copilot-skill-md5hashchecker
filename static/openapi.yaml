@@ -1,0 +1,36 @@
+openapi: 3.0.0
+info:
+  title: MD5 Hash Lookup API
+  version: 1.0.0
+paths:
+  /md5/{md5hash}:
+    get:
+      summary: Retrieves the original value of a given MD5 hash
+      parameters:
+        - in: path
+          name: md5hash
+          required: true
+          schema:
+            type: string
+          description: The MD5 hash to look up
+      responses:
+        '200':
+          description: A JSON object containing the original value of the hash
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  originalValue:
+                    type: string
+                    description: The original value of the MD5 hash
+        '404':
+          description: Hash not found or error in source API
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    description: Error message indicating the hash was not found or another error occurred
