@@ -1,32 +1,23 @@
 import os
 
-from flask import (Flask, redirect, render_template, request,
-                   send_from_directory, url_for)
+from flask import (Flask, jsonify, request)
 
 app = Flask(__name__)
 
+SOURCE_API_BASE_URL = "https://www.nitrxgen.net/md5db"
 
 @app.route('/')
 def index():
    print('Request for index page received')
    return render_template('index.html')
 
-@app.route('/favicon.ico')
-def favicon():
-    return send_from_directory(os.path.join(app.root_path, 'static'),
-                               'favicon.ico', mimetype='image/vnd.microsoft.icon')
-
-@app.route('/hello', methods=['POST'])
-def hello():
-   name = request.form.get('name')
-
-   if name:
-       print('Request for hello page received with name=%s' % name)
-       return render_template('hello.html', name = name)
-   else:
-       print('Request for hello page received with no name or blank name -- redirecting')
-       return redirect(url_for('index'))
-
+@app.route('/md5/<md5hash>', methods=['GET'])
+def get_md5_hash(md5hash):
+    response = requests.get(f"{SOURCE_API_BASE_URL}/{md5hash}.json")
+    if response.status_code == 200:
+        return jsonify(response.json())
+    else:
+        return jsonify({"error": "Hash not found or error in source API"}), 404
 
 if __name__ == '__main__':
-   app.run()
+    app.run
