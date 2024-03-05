@@ -20,11 +20,6 @@ app.register_blueprint(swaggerui_blueprint, url_prefix=SWAGGER_URL)
 
 SOURCE_API_BASE_URL = "https://www.nitrxgen.net/md5db"
 
-@app.route('/')
-def index():
-   print('Request for index page received')
-   return render_template('index.html')
-
 @app.route('/md5/<md5hash>', methods=['GET'])
 def get_md5_hash(md5hash):
     response = requests.get(f"{SOURCE_API_BASE_URL}/{md5hash}.json")
