@@ -1,0 +1,9 @@
+Descriptor:
+  Name: KnownMD5HashChecker
+  DisplayName: Known MD5 Hash Checker
+  Description: Checks if the provided MD5 hash is known
+
+SkillGroups:
+  - Format: API
+    Settings:
+      OpenApiSpecUrl: https://md5ch.azurewebsites.net/static/openapi.yaml
